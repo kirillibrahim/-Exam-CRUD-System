@@ -41,6 +41,8 @@ The submit button should be enabled only if the exam fields are valid, and there
 After submitting:
 
 The exam should be added to the list of exams stored in local storage.
+
+
 2. List Exams Page
 The List Exams Page displays a list of exams stored in local storage. Users can perform the following actions:
 
@@ -48,8 +50,10 @@ View Exams: Display a list of all exams with options to update each one. Clickin
 Create New Exam: A button located in the top-right corner of the page allows users to create a new exam. This button should link to the Exam Editor Page with an empty form for entering new exam details.
 UI and Functionality
 UI: The UI design should prioritize functionality over aesthetics. Keep it simple and easy to use.
+
 Tools and Frameworks:
-Next.js: Use the Pages router (not the App router).
+
+1-Next.js: Use the Pages router (not the App router).
 TailwindCSS (optional): For styling.
 React Hook Form (optional): For form state management.
 TypeScript: Use it for type safety.
