@@ -5,10 +5,12 @@ import { Exam } from '../constants/types';
 import { getExamByIdFromLocalStorage, saveExamToLocalStorage } from '../utils/localStorageUtils';
 import Question from './Question';
 
-const ExamEditor = () => {
+
+const ExamEditor: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
+  console.log(id);
   const isEdit = Boolean(id);
 
   const { control, handleSubmit, reset, formState: { errors, isValid } } = useForm<Exam>({
@@ -32,7 +34,7 @@ const ExamEditor = () => {
 
   useEffect(() => {
     if (isEdit && id) {
-      const exam = getExamByIdFromLocalStorage(id as string);
+      const exam = getExamByIdFromLocalStorage(id);
       if (exam) {
         reset(exam);
       }
