@@ -78,6 +78,7 @@ const ExamEditor = () => {
             control={control}
             questionIndex={questionIndex}
             removeQuestion={removeQuestion}
+            errors={errors}
           />
         ))}
 
@@ -102,4 +103,3 @@ const ExamEditor = () => {
 };
 
 export default ExamEditor;
-
