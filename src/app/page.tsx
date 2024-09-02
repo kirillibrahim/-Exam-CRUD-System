@@ -4,31 +4,26 @@ import { useEffect, useState } from 'react';
 import { Exam } from '../constants/types';
 import { getExamsFromLocalStorage, deleteExamFromLocalStorage } from '../utils/localStorageUtils';
 import Modal from '../components/Modal'; // Adjust the import path as needed
+import Link from 'next/link';
+
 
 export default function Home() {
   const router = useRouter();
   const [exams, setExams] = useState<Exam[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [examToDelete, setExamToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     setExams(getExamsFromLocalStorage());
   }, []);
 
-  const handleEdit = (id: string) => {
-    router.push(`/exam?id=${id}`);
-  };
 
-  const handleCreate = () => {
-    router.push(`/exam`);
-  };
-
-  const handleDeleteClick = (id: string) => {
+  const handleDeleteClick = (id: string): void => {
     setExamToDelete(id);
     setIsModalOpen(true);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (): void => {
     if (examToDelete) {
       deleteExamFromLocalStorage(examToDelete);
       setExams(getExamsFromLocalStorage()); // Refresh the list
@@ -37,7 +32,7 @@ export default function Home() {
     setIsModalOpen(false);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setIsModalOpen(false);
     setExamToDelete(null);
   };
@@ -47,12 +42,7 @@ export default function Home() {
       <div className="container mx-auto p-6">
         <div className="flex justify-between mb-6">
           <h1 className="text-3xl font-bold">Exams List</h1>
-          <button
-            onClick={handleCreate}
-            className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md"
-          >
-            Create New Exam
-          </button>
+          <Link href="/exam" className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">Create New Exam</Link>
         </div>
 
         {exams.length === 0 ? (
@@ -63,12 +53,7 @@ export default function Home() {
               <li key={exam.id} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
                 <h2 className="text-xl font-semibold">{exam.title}</h2>
                 <p className="text-gray-600 mb-2">{exam.description}</p>
-                <button
-                  onClick={() => handleEdit(exam.id)}
-                  className="text-blue-500 underline mr-4"
-                >
-                  Edit
-                </button>
+                <Link href={`/exam?id=${exam.id}`}  className="text-blue-500 underline mr-4">Edit</Link>
                 <button
                   onClick={() => handleDeleteClick(exam.id)}
                   className="text-red-500 underline"
